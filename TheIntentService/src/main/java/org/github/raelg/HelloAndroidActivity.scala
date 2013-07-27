@@ -8,9 +8,14 @@ import android.widget.TextView
 import org.github.raelg.controllers.FunctionToResultReceiver.fnToResultReceiver
 import android.app.Activity
 import android.os.{Bundle, Handler}
+import roboguice.activity.RoboActivity
+import roboguice.inject.InjectView
 
-class HelloAndroidActivity extends Activity{
+class HelloAndroidActivity extends Activity {
 
+    private lazy val errorTxt : TextView = findViewById(R.id.error_txt).asInstanceOf[TextView]
+    private lazy val tempTxt : TextView = findViewById(R.id.temp).asInstanceOf[TextView]
+    private lazy val humidityTxt : TextView = findViewById(R.id.humidity).asInstanceOf[TextView]
 
     /**
      * Called when the activity is first created.
@@ -23,10 +28,6 @@ class HelloAndroidActivity extends Activity{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val errorTxt : TextView = findViewById(R.id.error_txt).asInstanceOf[TextView]
-        val temp : TextView = findViewById(R.id.temp).asInstanceOf[TextView]
-        val humidity : TextView = findViewById(R.id.humidity).asInstanceOf[TextView]
-
         errorTxt.setText("")
 
         implicit val handler = new Handler
@@ -36,8 +37,8 @@ class HelloAndroidActivity extends Activity{
                 resultCode match {
                     case BaseController.STATUS_SUCCESS =>
                         val weather = resultData.getSerializable(FakeServiceController.Args.Weather).asInstanceOf[Weather]
-                        temp.setText("%.2f".format(weather.main.temp - 273.15))
-                        humidity.setText(weather.main.humidity.toString)
+                        tempTxt.setText("%.2f".format(weather.main.temp - 273.15))
+                        humidityTxt.setText(weather.main.humidity.toString)
                         errorTxt.setText("")
                     case BaseController.STATUS_ERROR =>
                         errorTxt.setText("Unable to connect to server")
