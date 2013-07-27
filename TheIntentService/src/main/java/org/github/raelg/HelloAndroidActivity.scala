@@ -42,7 +42,6 @@ class HelloAndroidActivity extends Activity {
                         errorTxt.setText("")
                     case BaseController.STATUS_ERROR =>
                         errorTxt.setText("Unable to connect to server")
-                        errorTxt.setText("")
                     case BaseController.STATUS_RETRYING =>
                         Log.d("FakeServiceController", "retrying")
                         errorTxt.setText("You may have poor 3G or Wifi connectivity")
