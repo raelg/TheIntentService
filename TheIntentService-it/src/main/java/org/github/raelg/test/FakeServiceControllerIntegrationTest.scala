@@ -35,7 +35,7 @@ class FakeServiceControllerIntegrationTest() extends AndroidTestCase {
 
         implicit val handler = null
 
-        val fakeServiceControllerIntent = FakeServiceController.IntentBuilder(getContext,
+        val fakeServiceControllerIntent = new FakeServiceController.IntentBuilder(getContext,
             (resultCode: Int, resultData: Bundle) =>
                 resultCode match {
                     case BaseController.STATUS_SUCCESS =>

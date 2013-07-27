@@ -32,7 +32,7 @@ class HelloAndroidActivity extends Activity {
 
         implicit val handler = new Handler
 
-        val fakeServiceControllerIntent = FakeServiceController.IntentBuilder(this,
+        val fakeServiceControllerIntent = new FakeServiceController.IntentBuilder(this,
             (resultCode: Int, resultData: Bundle) =>
                 resultCode match {
                     case BaseController.STATUS_SUCCESS =>
