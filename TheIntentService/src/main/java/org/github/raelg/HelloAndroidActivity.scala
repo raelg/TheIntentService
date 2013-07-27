@@ -32,7 +32,7 @@ class HelloAndroidActivity extends Activity {
 
         implicit val handler = new Handler
 
-        val fakeServiceControllerIntent = new WeatherController.IntentBuilder(this,
+        val weatherControllerIntent = new WeatherController.IntentBuilder(this,
             (resultCode: Int, resultData: Bundle) =>
                 resultCode match {
                     case BaseController.STATUS_SUCCESS =>
@@ -47,7 +47,7 @@ class HelloAndroidActivity extends Activity {
                         errorTxt.setText("You may have poor 3G or Wifi connectivity")
                 }
             , "London,uk").toIntent
-        startService(fakeServiceControllerIntent)
+        startService(weatherControllerIntent)
     }
 
     override def onCreateOptionsMenu(menu: Menu): Boolean = {
