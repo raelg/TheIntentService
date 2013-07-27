@@ -1,7 +1,7 @@
 package org.github.raelg
 
 import android.view.Menu
-import org.github.raelg.controllers.{BaseController, FakeServiceController}
+import org.github.raelg.controllers.{BaseController, WeatherController}
 import org.github.raelg.controllers.model.Weather
 import android.util.Log
 import android.widget.TextView
@@ -32,18 +32,18 @@ class HelloAndroidActivity extends Activity {
 
         implicit val handler = new Handler
 
-        val fakeServiceControllerIntent = new FakeServiceController.IntentBuilder(this,
+        val fakeServiceControllerIntent = new WeatherController.IntentBuilder(this,
             (resultCode: Int, resultData: Bundle) =>
                 resultCode match {
                     case BaseController.STATUS_SUCCESS =>
-                        val weather = resultData.getSerializable(FakeServiceController.Args.Weather).asInstanceOf[Weather]
+                        val weather = resultData.getSerializable(WeatherController.Args.Weather).asInstanceOf[Weather]
                         tempTxt.setText("%.2f".format(weather.main.temp - 273.15))
                         humidityTxt.setText(weather.main.humidity.toString)
                         errorTxt.setText("")
                     case BaseController.STATUS_ERROR =>
                         errorTxt.setText("Unable to connect to server")
                     case BaseController.STATUS_RETRYING =>
-                        Log.d("FakeServiceController", "retrying")
+                        Log.d("WeatherController", "retrying")
                         errorTxt.setText("You may have poor 3G or Wifi connectivity")
                 }
             , "London,uk").toIntent

@@ -14,7 +14,7 @@ import org.github.raelg.controllers.model._
  * Time: 23:46
  */
 
-object FakeServiceController {
+object WeatherController {
 
     object Args {
         val Weather = "user"
@@ -22,17 +22,17 @@ object FakeServiceController {
 
     private val I_LOCATION = "location"
 
-    class IntentBuilder(context: Context, resultReceiver: ResultReceiver, location: String) extends BaseIntentBuilder(context, resultReceiver, classOf[FakeServiceController]){
+    class IntentBuilder(context: Context, resultReceiver: ResultReceiver, location: String) extends BaseIntentBuilder(context, resultReceiver, classOf[WeatherController]){
         intent.putExtra(I_LOCATION, location)
     }
 }
 
 
-class FakeServiceController @Inject()(controller: RestController, bundler: Bundler) extends BaseController(controller, bundler) {
+class WeatherController @Inject()(controller: RestController, bundler: Bundler) extends BaseController(controller, bundler) {
 
     override def executeRequest(context: Context, intent: Intent): Bundle = {
 
-        val location = intent.getStringExtra(FakeServiceController.I_LOCATION)
+        val location = intent.getStringExtra(WeatherController.I_LOCATION)
         val url = "http://api.openweathermap.org/data/2.5/weather?q=" + location
         val request = controller.getRequest(url)
 
@@ -45,7 +45,7 @@ class FakeServiceController @Inject()(controller: RestController, bundler: Bundl
 
                 val weather = BaseController.fromJson(response, classOf[Weather])
                 // this should be putParcelable
-                bundle.putSerializable(FakeServiceController.Args.Weather, weather)
+                bundle.putSerializable(WeatherController.Args.Weather, weather)
 
                 bundle
             case _ =>

@@ -14,7 +14,7 @@
     </modules>
 
     <properties>
-        <baseUrl>http://www.example.com/</baseUrl>
+        <baseUrl>http://api.openweathermap.org/data/2.5/</baseUrl>
 
         <platform.version>4.1.1.4</platform.version>
         <android.plugin.version>3.6.0</android.plugin.version>

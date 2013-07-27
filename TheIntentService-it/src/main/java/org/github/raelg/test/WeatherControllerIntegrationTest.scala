@@ -1,7 +1,7 @@
 package org.github.raelg.test
 
 import android.test.AndroidTestCase
-import org.github.raelg.controllers.{BaseController, FakeServiceController}
+import org.github.raelg.controllers.{BaseController, WeatherController}
 import org.github.raelg.controllers.model.Weather
 import java.util.concurrent.Semaphore
 import android.util.Log
@@ -16,7 +16,7 @@ import android.os.{Bundle, Handler}
  * Date: 24/07/2013
  * Time: 18:47
  */
-class FakeServiceControllerIntegrationTest() extends AndroidTestCase {
+class WeatherControllerIntegrationTest() extends AndroidTestCase {
 
     override def setUp() = {
         super.setUp()
@@ -29,17 +29,17 @@ class FakeServiceControllerIntegrationTest() extends AndroidTestCase {
          */
     }
 
-    def testFakeServicesController() : Unit = {
+    def testWeatherController() : Unit = {
         val semaphore = new Semaphore(1, true)
         semaphore.acquire()
 
         implicit val handler = null
 
-        val fakeServiceControllerIntent = new FakeServiceController.IntentBuilder(getContext,
+        val weatherControllerIntent = new WeatherController.IntentBuilder(getContext,
             (resultCode: Int, resultData: Bundle) =>
                 resultCode match {
                     case BaseController.STATUS_SUCCESS =>
-                        val weather = resultData.getSerializable(FakeServiceController.Args.Weather).asInstanceOf[Weather]
+                        val weather = resultData.getSerializable(WeatherController.Args.Weather).asInstanceOf[Weather]
                         assertNotNull(weather.main.temp)
                         assertNotNull(weather.main.humidity)
                         semaphore.release()
@@ -47,14 +47,14 @@ class FakeServiceControllerIntegrationTest() extends AndroidTestCase {
                         fail("failure")
                         semaphore.release()
                     case BaseController.STATUS_RETRYING =>
-                        Log.d("FakeServiceController", "retrying")
+                        Log.d("WeatherController", "retrying")
                     case _ =>
                         semaphore.release()
                         fail("failure")
                         throw new RuntimeException("Failure")
                 }
         , "London,uk").toIntent
-        getContext.startService(fakeServiceControllerIntent)
+        getContext.startService(weatherControllerIntent)
 
         waitForSignal(semaphore)
     }

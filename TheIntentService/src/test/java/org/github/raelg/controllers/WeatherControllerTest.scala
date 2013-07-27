@@ -13,14 +13,14 @@ import org.github.raelg.controllers.model.Weather
  * Date: 22/07/2013
  * Time: 23:47
  */
-class FakeServiceControllerTest extends BaseTestController {
+class WeatherControllerTest extends BaseTestController {
 
-    private var test: FakeServiceController = null
+    private var test: WeatherController = null
 
     @Before
     override def setUp() {
         super.setUp()
-        test = new FakeServiceController(mockController, mockBundler)
+        test = new WeatherController(mockController, mockBundler)
     }
 
     @After
@@ -42,7 +42,7 @@ class FakeServiceControllerTest extends BaseTestController {
         verify(mockController).getRequest("http://api.openweathermap.org/data/2.5/weather?q=London,UK")
 
         val argument = ArgumentCaptor.forClass(classOf[Weather])
-        verify(mockBundle).putSerializable(Matchers.eq(FakeServiceController.Args.Weather), argument.capture())
+        verify(mockBundle).putSerializable(Matchers.eq(WeatherController.Args.Weather), argument.capture())
         val weather = argument.getValue
         print("weather: " + weather)
     }
