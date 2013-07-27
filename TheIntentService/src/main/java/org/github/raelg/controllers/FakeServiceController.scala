@@ -45,7 +45,7 @@ class FakeServiceController @Inject()(controller: RestController, bundler: Bundl
             case HttpStatus.SC_OK =>
 
                 val weather = BaseController.fromJson(response, classOf[Weather])
-
+                // this should be putParcelable
                 bundle.putSerializable(FakeServiceController.Args.Weather, weather)
 
                 bundle
