@@ -1,0 +1,34 @@
+{
+    "coord": {
+        "lon": -0.12574,
+        "lat": 51.50853
+    },
+    "sys": {
+        "country": "GB",
+        "sunrise": 1374639224,
+        "sunset": 1374696019
+    },
+    "weather": [
+        {
+            "id": 721,
+            "main": "Haze",
+            "description": "haze",
+            "icon": "50d"
+        }
+    ],
+    "base": "gdps stations",
+    "main": {
+        "temp": 296.03,
+        "pressure": 1015,
+        "humidity": 56,
+        "temp_min": 293.15,
+        "temp_max": 298.71
+    },
+    "wind": {
+        "speed": 5.1,
+        "deg": 240
+    },
+    "clouds": {
+        "all": 0
+    }, "dt": 1374661983, "id": 2643743, "name": "London", "cod": 200
+}
