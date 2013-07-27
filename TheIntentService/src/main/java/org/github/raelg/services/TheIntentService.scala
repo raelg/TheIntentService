@@ -40,7 +40,7 @@ sealed class TheIntentService extends IntentService("Service:TheOneTrueService")
     private final val MAX_RETRIES: Int = 5
 
     private var retryCount: Int = 0
-    private final val injector: Injector = Guice.createInjector(new ModuleLoader)
+    private lazy final val injector: Injector = Guice.createInjector(new ModuleLoader)
 
     private def execute(intent: Intent) {
         val receiver: ResultReceiver = intent.getParcelableExtra(TheIntentService.RECEIVER)
