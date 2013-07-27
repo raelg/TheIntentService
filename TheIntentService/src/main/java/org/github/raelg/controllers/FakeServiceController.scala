@@ -22,10 +22,9 @@ object FakeServiceController {
 
     private val I_LOCATION = "location"
 
-    class IntentBuilder(context: Context, resultReceiver: ResultReceiver, location: String) extends CreateBaseIntent(context, resultReceiver, classOf[FakeServiceController].getName){
+    class IntentBuilder(context: Context, resultReceiver: ResultReceiver, location: String) extends BaseIntentBuilder(context, resultReceiver, classOf[FakeServiceController]){
         intent.putExtra(I_LOCATION, location)
     }
-
 }
 
 

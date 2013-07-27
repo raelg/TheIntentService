@@ -17,11 +17,10 @@ import java.io.IOException
  * Time: 15:20
  */
 
-class CreateBaseIntent(context: Context, resultReceiver: ResultReceiver, clazz: String) {
+class BaseIntentBuilder[T <: BaseController](context: Context, resultReceiver: ResultReceiver, clazz : Class[T]) {
     protected val intent = new Intent(context, classOf[TheIntentService])
-    intent.putExtra(TheIntentService.CONTROLLER_SERVICE, clazz)
+    intent.putExtra(TheIntentService.CONTROLLER_SERVICE, clazz.getName)
     intent.putExtra(TheIntentService.RECEIVER, resultReceiver)
-
     def toIntent : Intent = intent
 }
 
