@@ -18,8 +18,8 @@ class FakeServiceControllerTest extends BaseTestController {
     private var test: FakeServiceController = null
 
     @Before
-    override def setUp {
-        super.setUp
+    override def setUp() {
+        super.setUp()
         test = new FakeServiceController(mockController, mockBundler)
     }
 

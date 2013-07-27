@@ -46,7 +46,7 @@ abstract class BaseTestController {
     protected var mockContext: Context = null
     protected var mockBundle: Bundle = null
 
-    @Before def setUp {
+    @Before def setUp() {
         MockitoAnnotations.initMocks(this)
         when(mockController.postRequest(anyString, any(classOf[JsonModel]))).thenCallRealMethod
         when(mockController.putRequest(anyString, any(classOf[JsonModel]))).thenCallRealMethod
