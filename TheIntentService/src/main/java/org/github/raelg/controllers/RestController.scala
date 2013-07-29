@@ -41,7 +41,7 @@ class RestController @Inject()(@Named("baseUrl") baseUrl: String) {
         (getStatusCode(httpResponse), getBodyAsString(httpResponse))
     }
 
-    def getResponseWithHeaders(request: HttpUriRequest) = {
+    def getResponseWithHeaders(request: HttpUriRequest) : (Int, String, Map[String,String]) = {
         val httpResponse: HttpResponse = execute(request)
         (getStatusCode(httpResponse), getBodyAsString(httpResponse), getHeaders(httpResponse))
     }

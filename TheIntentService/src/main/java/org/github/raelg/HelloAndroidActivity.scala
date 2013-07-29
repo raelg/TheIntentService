@@ -8,8 +8,6 @@ import android.widget.TextView
 import org.github.raelg.controllers.FunctionToResultReceiver.fnToResultReceiver
 import android.app.Activity
 import android.os.{Bundle, Handler}
-import roboguice.activity.RoboActivity
-import roboguice.inject.InjectView
 
 class HelloAndroidActivity extends Activity {
 
@@ -37,7 +35,7 @@ class HelloAndroidActivity extends Activity {
                 resultCode match {
                     case BaseController.STATUS_SUCCESS =>
                         val weather = resultData.getSerializable(WeatherController.Args.Weather).asInstanceOf[Weather]
-                        tempTxt.setText("%.2f".format(weather.main.temp - 273.15))
+                        tempTxt.setText("%.2f".format(weather.main.tempInCelsius))
                         humidityTxt.setText(weather.main.humidity.toString)
                         errorTxt.setText("")
                     case BaseController.STATUS_ERROR =>

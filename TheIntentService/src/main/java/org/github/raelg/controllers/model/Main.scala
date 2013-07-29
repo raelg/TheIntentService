@@ -12,4 +12,5 @@ class Main(val temp: Double, val humidity: Int) extends JsonModel with Serializa
         "temp: " + temp + ", humidity: " + humidity
     }
 
+    lazy val tempInCelsius = temp - 273.15
 }

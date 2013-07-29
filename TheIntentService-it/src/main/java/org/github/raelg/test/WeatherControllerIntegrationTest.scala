@@ -6,8 +6,8 @@ import org.github.raelg.controllers.model.Weather
 import java.util.concurrent.Semaphore
 import android.util.Log
 import junit.framework.Assert._
+import android.os.Bundle
 import org.github.raelg.controllers.FunctionToResultReceiver.fnToResultReceiver
-import android.os.{Bundle, Handler}
 
 
 /**
