@@ -3,6 +3,7 @@ package org.github.raelg.module
 import com.google.inject.{Binder, Module}
 import com.google.inject.name.Names
 import org.github.raelg.utils.PropertyUtils
+import org.github.raelg.controllers.RestController
 
 /**
  * Created with IntelliJ IDEA.

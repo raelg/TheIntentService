@@ -24,16 +24,15 @@ class App extends android.app.Application {
 
     override def onCreate() {
         super.onCreate
-
+        App.context = this
         val settings: SharedPreferences = getSharedPreferences(Identifiers.PREFERENCES, Context.MODE_PRIVATE)
         if (settings.getBoolean("isFirstRun", true)) {
-            val properties: Properties = PropertyUtils.getProperties("project.properties")
-            val baseUrl: String = properties.getProperty("baseUrl")
+            val properties = PropertyUtils.getProperties("project.properties")
+            val baseUrl = properties.getProperty("baseUrl")
             val editor: SharedPreferences.Editor = settings.edit
             editor.putString(Identifiers.BASE_URL, baseUrl)
             editor.putBoolean("isFirstRun", false)
             editor.commit
         }
-        App.context = this
     }
 }

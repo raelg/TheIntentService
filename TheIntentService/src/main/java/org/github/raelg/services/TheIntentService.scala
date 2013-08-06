@@ -36,22 +36,21 @@ sealed class TheIntentService extends IntentService("Service:TheOneTrueService")
         execute(intent)
     }
 
-    final val TAG: String = "intent-service"
-    private final val MAX_RETRIES: Int = 5
+    private val TAG = "intent-service"
+    private val MAX_RETRIES: Int = 3
 
     private var retryCount: Int = 0
-    private lazy final val injector: Injector = Guice.createInjector(new ModuleLoader)
+    private lazy val injector: Injector = Guice.createInjector(new ModuleLoader)
 
     private def execute(intent: Intent) {
         val receiver: ResultReceiver = intent.getParcelableExtra(TheIntentService.RECEIVER)
         val controller = intent.getStringExtra(TheIntentService.CONTROLLER_SERVICE)
         try {
-            val clazz: Class[_] = Class.forName(controller)
-            val service: BaseController = injector.getInstance(clazz).asInstanceOf[BaseController]
-            val bundle: Bundle = service.executeRequest(this, intent)
+            val clazz = Class.forName(controller)
+            val service = injector.getInstance(clazz).asInstanceOf[BaseController]
+            val bundle = service.executeRequest(this, intent)
             receiver.send(BaseController.STATUS_SUCCESS, bundle)
-        }
-        catch {
+        } catch {
             case e: ControllerException =>
                 handleError(receiver, controller)
             case e: ServerException =>
@@ -85,7 +84,7 @@ sealed class TheIntentService extends IntentService("Service:TheOneTrueService")
     }
 
     private def retry(intent: Intent, receiver: ResultReceiver, controller: String) {
-        if (retryCount < MAX_RETRIES) {
+        if (retryCount <= MAX_RETRIES) {
             Log.i("intent-service", "Retrying %s, retryCount %d".format(controller, retryCount))
             retryCount += 1
             val task: TimerTask = new TimerTask {
@@ -96,8 +95,7 @@ sealed class TheIntentService extends IntentService("Service:TheOneTrueService")
             val timer = new Timer
             timer.schedule(task, retryCount * 1000)
             receiver.send(BaseController.STATUS_RETRYING, new Bundle)
-        }
-        else {
+        } else {
             handleError(receiver, "Unable to establish connection")
         }
     }

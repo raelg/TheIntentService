@@ -11,9 +11,9 @@ import android.os.{Bundle, Handler}
 
 class HelloAndroidActivity extends Activity {
 
-    private lazy val errorTxt : TextView = findViewById(R.id.error_txt).asInstanceOf[TextView]
-    private lazy val tempTxt : TextView = findViewById(R.id.temp).asInstanceOf[TextView]
-    private lazy val humidityTxt : TextView = findViewById(R.id.humidity).asInstanceOf[TextView]
+    private lazy val errorTxt  = findViewById(R.id.error_txt).asInstanceOf[TextView]
+    private lazy val tempTxt  = findViewById(R.id.temp).asInstanceOf[TextView]
+    private lazy val humidityTxt = findViewById(R.id.humidity).asInstanceOf[TextView]
 
     /**
      * Called when the activity is first created.
@@ -48,7 +48,7 @@ class HelloAndroidActivity extends Activity {
         startService(weatherControllerIntent)
     }
 
-    override def onCreateOptionsMenu(menu: Menu): Boolean = {
+    override def onCreateOptionsMenu(menu: Menu) = {
         getMenuInflater.inflate(R.menu.main, menu)
         true
     }

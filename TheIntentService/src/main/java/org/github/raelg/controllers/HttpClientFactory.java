@@ -52,10 +52,10 @@ public class HttpClientFactory {
         HttpParams httpParameters = new BasicHttpParams();
         ConnManagerParams.setTimeout(httpParameters, 1000);
         // Set the timeout in milliseconds until a connection is established.
-        HttpConnectionParams.setConnectionTimeout(httpParameters, 5000);
+        HttpConnectionParams.setConnectionTimeout(httpParameters, 1000);
         // Set the default socket timeout (SO_TIMEOUT)
         // in milliseconds which is the timeout for waiting for data.
-        HttpConnectionParams.setSoTimeout(httpParameters, 30000);
+        HttpConnectionParams.setSoTimeout(httpParameters, 1000);
         return httpParameters;
     }
 
